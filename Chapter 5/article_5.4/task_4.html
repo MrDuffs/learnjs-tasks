@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function sumInput() {
+            const array = [];
+            let value;
+            let sum = 0;
+
+            do {
+                value = prompt('Введите число:', 0);
+
+                if (value == '' || value == null) break;
+
+                array.push(+value);
+            } while (isFinite(value));
+
+            for (let elem of array) {
+                sum += elem;
+            }
+
+            return sum;
+        }
+
+        alert(`Сумма элементов массива: ${sumInput()}`);
+    </script>
+</body>
+</html>
