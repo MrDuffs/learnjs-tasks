@@ -1,0 +1,22 @@
+<!doctype html>
+<body>
+    <script>
+    function handler() {
+        alert( "..." );
+        return false;
+    }
+    </script>
+
+    <!-- first variant -->
+    <a href="https://w3.org" onclick="return handler()">браузер откроет w3.org</a>
+
+    <!-- 2-end variant -->
+    <!-- <script>
+    function handler(event) {
+      alert( "..." );
+      event.preventDefault();
+    }
+  </script>
+  
+  <a href="https://w3.org" onclick="handler(event)">браузер откроет w3.org</a> -->
+</body>

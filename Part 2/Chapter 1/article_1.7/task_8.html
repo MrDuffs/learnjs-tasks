@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- клик по этой кнопке вызовет clockStart() -->
+    <input type="button" onclick="clockStart()" value="Старт">
+
+    <!-- клик по этой кнопке вызовет clockStop() -->
+    <input type="button" onclick="clockStop()" value="Стоп">
+
+    <script>
+        let clock = document.createElement('div');
+        document.body.prepend(clock);
+
+        let hoursSpan = document.createElement('span');
+        hoursSpan.style.color = 'red';
+        hoursSpan.innerHTML = 'hh';
+
+        let minutesSpan = document.createElement('span');
+        minutesSpan.style.color = 'green';
+        minutesSpan.innerHTML = 'mm';
+
+        let secondsSpan = document.createElement('span');
+        secondsSpan.style.color = 'blue';
+        secondsSpan.innerHTML = 'ss';
+
+        clock.append(hoursSpan);
+        clock.append(':');
+        clock.append(minutesSpan);
+        clock.append(':');
+        clock.append(secondsSpan);
+
+        function getTime() {
+            let date = new Date();
+           
+            let hours = date.getHours();
+            if (hours < 10) hours = '0' + hours;
+            hoursSpan.innerHTML = hours;
+             
+            let minutes = date.getMinutes();
+            if (minutes < 10) minutes = '0' + minutes;
+            minutesSpan.innerHTML = minutes;
+            
+            let seconds = date.getSeconds();
+            if (seconds < 10) seconds = '0' + seconds;
+            secondsSpan.innerHTML = seconds;
+        }
+
+        let timerId;
+
+        function clockStart() {
+            timerId = setInterval( getTime, 1000);
+            getTime();
+        }
+
+        function clockStop() {
+            clearInterval(timerId);
+            timerId = null;
+        }
+    </script>
+</body>
+</html>

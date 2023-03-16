@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      #mouse {
+        display: inline-block;
+        cursor: pointer;
+        margin: 0;
+        transition: all 0.1s ease-out;
+      }
+
+      #mouse:focus {
+        outline: 1px dashed black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>
+      Кликните по "изображению" мыши и перемещайте её с помощью клавиш со
+      стрелками.
+    </p>
+
+    <pre id="mouse">
+ _   _
+(q\_/p)
+ /. .\
+=\_t_/=   __
+ /   \   (
+((   ))   )
+/\) (/\  /
+\  Y  /-'
+ nn^nn
+</pre
+    >
+
+    <script>
+      let mouseCoords = mouse.getBoundingClientRect();
+      mouse.onclick = function () {
+        this.tabIndex = true;
+        this.style.position = "fixed";
+      };
+
+      let mouseMoveY = mouseCoords.top;
+      let mouseMoveX = mouseCoords.left;
+      mouse.addEventListener("keydown", (event) => {
+        switch (event.code) {
+          case "ArrowDown":
+            mouseMoveY += 30;
+            mouse.style.top = mouseMoveY + "px";
+            break;
+          case "ArrowUp":
+            mouseMoveY -= 30;
+            mouse.style.top = mouseMoveY + "px";
+            break;
+          case "ArrowLeft":
+            mouseMoveX -= 30;
+            mouse.style.left = mouseMoveX + "px";
+            break;
+          case "ArrowRight":
+            mouseMoveX += 30;
+            mouse.style.left = mouseMoveX + "px";
+            break;
+        }
+      });
+    </script>
+  </body>
+</html>

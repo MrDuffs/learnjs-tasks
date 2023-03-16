@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+
+      #prompt-form {
+        display: inline-block;
+        padding: 5px 5px 5px 70px;
+        width: 200px;
+        border: 1px solid black;
+        background: white url(https://en.js.cx/clipart/prompt.png) no-repeat
+          left 5px;
+        vertical-align: middle;
+      }
+
+      #prompt-form-container {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+      }
+
+      #prompt-form-container:before {
+        display: inline-block;
+        height: 100%;
+        content: "";
+        vertical-align: middle;
+      }
+
+      #prompt-form input[name="text"] {
+        display: block;
+        margin: 5px;
+        width: 180px;
+      }
+
+      #form-cover {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9000;
+        width: 100%;
+        height: 100%;
+        background-color: gray;
+        opacity: 0.3;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Кликните на кнопку ниже</h2>
+    <input
+      type="button"
+      value="Кликните, чтобы увидеть форму"
+      id="show-button"
+    />
+
+    <div id="prompt-form-container">
+      <form id="prompt-form">
+        <div id="prompt-message">Введите что-нибудь... <br />Пожалуйста..</div>
+        <input name="text" type="text" />
+        <input type="submit" name="submit" value="Ok" />
+        <input type="button" name="cancel" value="Отмена" />
+      </form>
+    </div>
+    <div id="form-cover" hidden></div>
+  </body>
+
+  <script>
+    let showButton = document.getElementById("show-button");
+
+    function showPrompt(html, callback) {
+      let formContainer = document.getElementById("prompt-form-container");
+      let formCover = document.getElementById("form-cover");
+      let form = document.getElementById("prompt-form");
+      let textInput = form.text;
+      let inputSubmit = form.submit;
+      let inputCancel = form.cancel;
+
+      document.getElementById("prompt-message").innerHTML = html;
+      formContainer.style.display = "block";
+      formCover.hidden = !formCover.hidden;
+      textInput.focus();
+
+      function closeModal(value) {
+        formContainer.style.display = "none";
+        formCover.hidden = !formCover.hidden;
+        document.onkeydown = null;
+        callback(value);
+      }
+
+      form.onsubmit = () => {
+        if (textInput.value == "") return false;
+        closeModal(textInput.value);
+        return false;
+      };
+
+      inputCancel.onclick = () => closeModal(null);
+
+      formContainer.onkeydown = function (e) {
+        if (e.key === "Escape") closeModal(null);
+      };
+
+      textInput.onkeydown = (e) => {
+        if (e.key === "Tab" && e.shiftKey) {
+          inputCancel.focus();
+          e.preventDefault();
+        }
+      };
+
+      inputCancel.onkeydown = (e) => {
+        if (e.key === "Tab" && !e.shiftKey) {
+          textInput.focus();
+          e.preventDefault();
+        }
+      };
+    }
+
+    showButton.onclick = function () {
+      showPrompt("Введите что-нибудь<br>...умное :)", function (value) {
+        alert(`Вы ввели: ${value}`);
+      });
+    };
+  </script>
+</html>

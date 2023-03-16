@@ -1,0 +1,19 @@
+/* ваши стили */
+
+td.edit {
+  position: relative;
+  padding: 0;
+}
+
+textarea {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  resize: none;
+  overflow: auto;
+}
+
+.edit-buttons {
+  position: absolute;
+}

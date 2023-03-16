@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+
+    <script>
+        let data = {
+            "Рыбы": {
+                "форель": {},
+                "лосось": {}
+            },
+
+            "Деревья": {
+                "Огромные": {
+                    "секвойя": {},
+                    "дуб": {}
+                },
+                "Цветковые": {
+                    "яблоня": {},
+                    "магнолия": {}
+                }
+            }
+        };
+
+        let container = document.getElementById('container');
+
+        // Способ через DOM.
+        // function createTree(container, data) {
+        //     let ul = document.createElement('ul');
+        //     for (let key in data) {
+        //         ul.insertAdjacentHTML('beforeend', `<li>${key}</li>`);
+
+        //         if (JSON.stringify(data[key]) != '{}') {
+        //             createTree(ul.lastChild, data[key]);
+        //         }
+        //     }
+
+        //     container.append(ul);
+        // }
+
+        // Способ через innerHTML
+        function createTree(container, data) {
+            let ul = document.createElement('ul');
+
+            for (let key in data) {
+                ul.innerHTML += `<li>${key}</li>`;
+
+                if (JSON.stringify(data[key]) != '{}') {
+                    createTree(ul.lastChild, data[key]);
+                }
+            }
+
+            container.append(ul);
+        }
+
+        createTree(container, data);
+    </script>
+</body>
+</html>

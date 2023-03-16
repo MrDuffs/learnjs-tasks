@@ -10,7 +10,7 @@ function formatDate(date) {
     } else if (diff <= 3600) {
         return `${Math.floor(diff / 60)} мин. назад`
     } else {
-        return new Date(date).toLocaleString().slice(0,-3);;
+        return new Date(date).toLocaleString().slice(0,-3);
     }
 
 }
